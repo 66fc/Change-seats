@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自动换座位系统</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>自动换座位系统</h1>
+
+      <div class="print-section">
+        <button id="printBtn" class="print-btn">
+          <span class="print-icon">🖨️</span>
+          打印座位表
+        </button>
+      </div>
+
+      <div class="restart-section">
+        <button id="restartBtn" class="restart-btn">
+          <span class="restart-icon">🔄</span>
+          重新开始
+        </button>
+      </div>
+
+      <div class="import-section">
+        <input
+          type="file"
+          id="fileInput"
+          accept=".xlsx,.xls,.csv"
+          class="hidden"
+        />
+        <button id="importBtn" class="secondary-btn">导入名单</button>
+        <span id="fileName" class="file-name"></span>
+      </div>
+
+      <div class="setup-section">
+        <div class="input-group">
+          <label for="numStudents">请输入人数：</label>
+          <input type="number" id="numStudents" min="1" max="100" />
+          <div class="grid-settings">
+            <div class="grid-input">
+              <label for="rows">行数：</label>
+              <input type="number" id="rows" min="1" />
+            </div>
+            <div class="grid-input">
+              <label for="cols">列数：</label>
+              <input type="number" id="cols" min="1" />
+            </div>
+          </div>
+          <button id="generateSeats">生成座位</button>
+        </div>
+        <button id="randomize" class="hidden">随机调整座位</button>
+      </div>
+
+      <div class="classroom">
+        <div id="classroom-layout" class="classroom-layout hidden">
+          <div class="podium">
+            <div class="podium-text">讲台</div>
+          </div>
+          <div id="seatingChart" class="seating-chart"></div>
+        </div>
+      </div>
+    </div>
+    <!-- 添加列选择弹窗 -->
+    <div id="columnSelectModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>选择要导入的内容</h2>
+        <p class="modal-tip">可以选择多个内容，点击选中/取消</p>
+        <div id="columnList" class="column-list"></div>
+        <div class="modal-buttons">
+          <button id="confirmColumn" class="secondary-btn">确认</button>
+          <button id="cancelColumn">取消</button>
+        </div>
+      </div>
+    </div>
+    <!-- 添加打印选项弹窗 -->
+    <div id="printOptionModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>打印选项</h2>
+        <div class="print-options">
+          <label class="print-option">
+            <input type="checkbox" id="printEmptySeats" checked />
+            打印空座位
+          </label>
+        </div>
+        <div class="modal-buttons">
+          <button id="confirmPrint" class="secondary-btn">确认打印</button>
+          <button id="cancelPrint">取消</button>
+        </div>
+      </div>
+    </div>
+    <!-- 添加重复名字处理弹窗 -->
+    <div id="duplicateNamesModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>发现重复的名字</h2>
+        <p class="modal-tip">请选择要保留的名字（可多选）</p>
+        <div id="duplicateList" class="duplicate-list"></div>
+        <div class="modal-buttons">
+          <button id="confirmDuplicate" class="secondary-btn">确认</button>
+          <button id="cancelDuplicate">取消</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
